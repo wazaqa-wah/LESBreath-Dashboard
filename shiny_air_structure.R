@@ -14,7 +14,7 @@ weekly <- "30" #average of 30 minutes
 monthly <- "10080" #average of a week
 yearly <- "44640" #average of a month
 baseUrl <- "https://api.purpleair.com/"
-apiKey <- "EEFDC0A9-0138-11ED-8561-42010A800005"
+apiKey <- "APIKEY"
 
 
 
@@ -27,7 +27,7 @@ getParams <- function(timeSpan,pickTime,sensorID){
   
   timeSpanDict <- Dict$new(
     liveUpdate = Dict$new(
-      url =  paste(baseUrl,"v1/groups/1211/members/",
+      url =  paste(baseUrl,"v1/groups/NUMBER/members/",
                    sensorID,"/history/csv?start_timestamp=",
                    as.numeric(startTime),"&end_timestamp=",
                    as.numeric(currentTime),"&fields=pm2.5_atm,humidity,temperature", sep = ""),
@@ -45,7 +45,7 @@ getParams <- function(timeSpan,pickTime,sensorID){
       }
     ),
     daily = Dict$new(
-      url =  paste(baseUrl,"v1/groups/1211/members/",
+      url =  paste(baseUrl,"v1/groups/NUMBER/members/",
                    sensorID,"/history/csv?start_timestamp=", 
                    round(as.numeric(pickTime - 24*3600)) , "&end_timestamp=",
                    round(as.numeric(pickTime)), "&fields=pm2.5_atm,humidity,temperature", sep = ""),
@@ -63,7 +63,7 @@ getParams <- function(timeSpan,pickTime,sensorID){
       }
     ),
     weekly = Dict$new(
-      url =  paste(baseUrl,"v1/groups/1211/members/",
+      url =  paste(baseUrl,"v1/groups/NUMBER/members/",
                    sensorID,"/history/csv?start_timestamp=", 
                    round(as.numeric(pickTime - 24*3600*7)) , "&end_timestamp=",
                    round(as.numeric(pickTime)), "&fields=pm2.5_atm,humidity,temperature&average=", weekly, sep = ""),
@@ -80,7 +80,7 @@ getParams <- function(timeSpan,pickTime,sensorID){
       }
     ),
     monthly = Dict$new(
-      url =  paste(baseUrl,"v1/groups/1211/members/",
+      url =  paste(baseUrl,"v1/groups/NUMBER/members/",
                    sensorID,"/history/csv?start_timestamp=", 
                    round(as.numeric(pickTime)), "&end_timestamp=",
                    round(as.numeric(pickTime + 24*3600*30)), "&fields=pm2.5_atm,humidity,temperature&average=", monthly, sep = ""),
@@ -95,7 +95,7 @@ getParams <- function(timeSpan,pickTime,sensorID){
       }
     ),
     yearly = Dict$new(
-      url =  paste(baseUrl,"v1/groups/1211/members/",
+      url =  paste(baseUrl,"v1/groups/NUMBER/members/",
                    sensorID,"/history/csv?start_timestamp=", 
                    round(as.numeric(pickTime)) , "&end_timestamp=",
                    round(as.numeric(pickTime + 24*3600*365)), "&fields=pm2.5_atm,humidity,temperature&average=", yearly, sep = ""),
